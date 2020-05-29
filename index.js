@@ -3,7 +3,11 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 4500
 const db = require('./controller/User')
+const fileRoutes = require('./file-upload')
+
+
 var cors = require('cors')
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(
@@ -24,6 +28,11 @@ app.post('/deleteuser', db.DeleteUser)
 app.post('/updateuser', db.UpdateUser)
 
 
+app.post('/updateprofile/:id', db.UpdateUserProfile)
+
+
+
+app.use("", fileRoutes);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

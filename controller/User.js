@@ -79,7 +79,6 @@ const UpdateUser = (request, response) => {
     if (error) {
         throw error
     }
-    
     return Respond.reply(response, result ={
         "id" : id,
         "username" : username,
@@ -87,13 +86,34 @@ const UpdateUser = (request, response) => {
         "lastname" : lastname,
         "email" : email,
         "msg" : 'success'
-
-    })
-
-
-    }
-)
+    })})
 }
+
+
+
+
+const UpdateUserProfile = (profile, id) => {
+    // const id = parseInt(request.params.id)
+    // const id = parseInt(request.params.id)
+    // var { id, username, firstname, lastname, email } = request.body
+    // id = parseInt(id)
+    pool.query(
+    'UPDATE users SET profile = $1 WHERE id = $2',
+    [profile, id],
+    (error, results) => {
+    if (error) {
+        throw error
+    }
+    
+    return true
+    // return Respond.reply(response, result ={
+    //     "id" : "true",
+    // })})
+})
+
+}
+
+
 
 const DeleteUser = (request, response) => {
     const id = parseInt(request.params.id)
@@ -126,4 +146,5 @@ module.exports = {
     CreateUser,
     UpdateUser,
     DeleteUser,
+    UpdateUserProfile
 }
